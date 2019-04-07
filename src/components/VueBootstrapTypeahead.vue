@@ -13,7 +13,7 @@
         :placeholder="placeholder"
         :aria-label="placeholder"
         :value="inputValue"
-        @focus="isFocused = true"
+        @focus="handleFocus"
         @blur="handleBlur"
         @input="handleInput($event.target.value)"
         autocomplete="off"
@@ -148,7 +148,13 @@ export default {
       if (tgt && tgt.classList.contains('vbst-item')) {
         return
       }
+      this.$emit('blur')
       this.isFocused = false
+    },
+
+    handleFocus(evt) {
+      this.$emit('focus')
+      this.isFocused = true
     },
 
     handleInput(newValue) {
